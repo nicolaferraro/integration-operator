@@ -22,7 +22,7 @@ type Integration struct {
 }
 
 type IntegrationSpec struct {
-	// Fill me
+	Replicas          *int32 `json:"replicas"`
 }
 type IntegrationStatus struct {
 	// Fill me

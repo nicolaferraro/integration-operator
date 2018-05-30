@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8faaac78-c3cc-4eea-8bd5-d8dcdb2e9062" name="Default" comment="" />
+    <list default="true" id="8faaac78-c3cc-4eea-8bd5-d8dcdb2e9062" name="Default" comment="Initial setup">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/deploy/cr.yaml" afterPath="$PROJECT_DIR$/deploy/cr.yaml" />
+      <change beforePath="$PROJECT_DIR$/pkg/apis/camel/v1alpha1/types.go" afterPath="$PROJECT_DIR$/pkg/apis/camel/v1alpha1/types.go" />
+      <change beforePath="$PROJECT_DIR$/pkg/stub/handler.go" afterPath="$PROJECT_DIR$/pkg/stub/handler.go" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,7 +15,110 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="cr.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deploy/cr.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rbac.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deploy/rbac.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="828">
+              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/config.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="handler.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pkg/stub/handler.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="35" column="48" lean-forward="false" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+              <folding>
+                <element signature="e#14#372#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="types.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/k8s.io/api/core/v1/types.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="3082" column="11" lean-forward="false" selection-start-line="3082" selection-start-column="11" selection-end-line="3082" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="types.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/k8s.io/apimachinery/pkg/apis/meta/v1/types.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="209" column="4" lean-forward="false" selection-start-line="209" selection-start-column="4" selection-end-line="209" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="types.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/k8s.io/api/apps/v1/types.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="274" column="4" lean-forward="false" selection-start-line="274" selection-start-column="4" selection-end-line="274" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="types.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pkg/apis/camel/v1alpha1/types.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="operator.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deploy/operator.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -36,6 +144,10 @@
         <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/integration-operator.go" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/deploy/operator.yaml" />
+        <option value="$PROJECT_DIR$/pkg/apis/camel/v1alpha1/types.go" />
+        <option value="$PROJECT_DIR$/deploy/cr.yaml" />
+        <option value="$PROJECT_DIR$/pkg/stub/handler.go" />
       </list>
     </option>
   </component>
@@ -86,7 +198,23 @@
             <path>
               <item name="integration-operator" type="b2602c69:ProjectViewProjectNode" />
               <item name="integration-operator" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="integration-operator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="integration-operator" type="462c0819:PsiDirectoryNode" />
               <item name="deploy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="integration-operator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="integration-operator" type="462c0819:PsiDirectoryNode" />
+              <item name="pkg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="integration-operator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="integration-operator" type="462c0819:PsiDirectoryNode" />
+              <item name="pkg" type="462c0819:PsiDirectoryNode" />
+              <item name="stub" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -196,7 +324,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial binary" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial binary" />
+    <MESSAGE value="Initial setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial setup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -215,14 +344,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -288,6 +409,144 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration-operator.go" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration-operator.go" />
+    <entry file="file://$PROJECT_DIR$/pkg/apis/camel/v1alpha1/doc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/apis/camel/v1alpha1/zz_generated.deepcopy.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/apis/camel/v1alpha1/register.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmd/integration-operator/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy/crd.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy/rbac.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/apis/camel/v1alpha1/types.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy/operator.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/k8s.io/api/apps/v1/types.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="274" column="4" lean-forward="false" selection-start-line="274" selection-start-column="4" selection-end-line="274" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/k8s.io/api/core/v1/types.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="3082" column="11" lean-forward="false" selection-start-line="3082" selection-start-column="11" selection-end-line="3082" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/k8s.io/apimachinery/pkg/apis/meta/v1/types.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="209" column="4" lean-forward="false" selection-start-line="209" selection-start-column="4" selection-end-line="209" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy/cr.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/stub/handler.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="35" column="48" lean-forward="false" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+          <folding>
+            <element signature="e#14#372#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>

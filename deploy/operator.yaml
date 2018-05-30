@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: integration-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: integration-operator
+  template:
+    metadata:
+      labels:
+        name: integration-operator
+    spec:
+      containers:
+        - name: integration-operator
+          image: docker.io/nferraro/integration-operator
+          command:
+          - integration-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace

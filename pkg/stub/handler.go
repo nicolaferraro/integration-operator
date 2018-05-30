@@ -11,6 +11,7 @@ import (
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+	appsv1 "k8s.io/api/apps/v1"
 )
 
 func NewHandler() sdk.Handler {
@@ -24,27 +25,29 @@ type Handler struct {
 func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 	switch o := event.Object.(type) {
 	case *v1alpha1.Integration:
-		err := sdk.Create(newbusyBoxPod(o))
+		deployment := newDeployment(o)
+		err := sdk.Create(deployment)
 		if err != nil && !errors.IsAlreadyExists(err) {
-			logrus.Errorf("Failed to create busybox pod : %v", err)
+			logrus.Errorf("Failed to create integration deployment : %v", err)
 			return err
+		} else if err != nil {
+			err := sdk.Update(deployment)
+			if err != nil {
+				logrus.Errorf("Failed to update integration deployment : %v", err)
+			}
 		}
 	}
 	return nil
 }
 
-// newbusyBoxPod demonstrates how to create a busybox pod
-func newbusyBoxPod(cr *v1alpha1.Integration) *v1.Pod {
-	labels := map[string]string{
-		"app": "busy-box",
-	}
-	return &v1.Pod{
+func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
+	return &appsv1.Deployment{
 		TypeMeta: metav1.TypeMeta{
-			Kind:       "Pod",
-			APIVersion: "v1",
+			Kind:       "Deployment",
+			APIVersion: "apps/v1",
 		},
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      "busy-box",
+			Name:      cr.Name,
 			Namespace: cr.Namespace,
 			OwnerReferences: []metav1.OwnerReference{
 				*metav1.NewControllerRef(cr, schema.GroupVersionKind{
@@ -53,12 +56,58 @@ func newbusyBoxPod(cr *v1alpha1.Integration) *v1.Pod {
 					Kind:    "Integration",
 				}),
 			},
-			Labels: labels,
+			Labels: cr.Labels,
+		},
+		Spec: appsv1.DeploymentSpec{
+			Replicas: cr.Spec.Replicas,
+			Selector: &metav1.LabelSelector{
+				MatchLabels: map[string]string{
+					"integration": cr.Name,
+				},
+			},
+			Template: v1.PodTemplateSpec{
+				ObjectMeta: metav1.ObjectMeta{
+					Labels: map[string]string{
+						"integration": cr.Name,
+					},
+				},
+				Spec: v1.PodSpec{
+					Containers: []v1.Container{
+						{
+							Name:    cr.Name,
+							Image:   "busybox",
+							Command: []string{"sleep", "3600"},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// newbusyBoxPod demonstrates how to create a busybox pod
+func newbusyBoxPod(cr *v1alpha1.Integration) *v1.Pod {
+	return &v1.Pod{
+		TypeMeta: metav1.TypeMeta{
+			Kind:       "Pod",
+			APIVersion: "v1",
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      cr.Name,
+			Namespace: cr.Namespace,
+			OwnerReferences: []metav1.OwnerReference{
+				*metav1.NewControllerRef(cr, schema.GroupVersionKind{
+					Group:   v1alpha1.SchemeGroupVersion.Group,
+					Version: v1alpha1.SchemeGroupVersion.Version,
+					Kind:    "Integration",
+				}),
+			},
+			Labels: cr.Labels,
 		},
 		Spec: v1.PodSpec{
 			Containers: []v1.Container{
 				{
-					Name:    "busybox",
+					Name:    cr.Name,
 					Image:   "busybox",
 					Command: []string{"sleep", "3600"},
 				},
