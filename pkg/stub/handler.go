@@ -12,6 +12,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	appsv1 "k8s.io/api/apps/v1"
+	"github.com/nicolaferraro/integration-operator/pkg/util"
 )
 
 func NewHandler() sdk.Handler {
@@ -41,6 +42,12 @@ func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 }
 
 func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
+
+	routes, err := util.Serialize(cr.Spec.Routes)
+	if err != nil {
+		logrus.Error("Error while extracting routes", err)
+	}
+
 	return &appsv1.Deployment{
 		TypeMeta: metav1.TypeMeta{
 			Kind:       "Deployment",
@@ -75,8 +82,14 @@ func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
 					Containers: []v1.Container{
 						{
 							Name:    cr.Name,
-							Image:   "busybox",
-							Command: []string{"sleep", "3600"},
+							Image:   "nferraro/yaml2camel:latest",
+							ImagePullPolicy: v1.PullIfNotPresent,
+							Env:	 []v1.EnvVar{
+								{
+									Name: "CAMEL_ROUTES",
+									Value: routes,
+								},
+							},
 						},
 					},
 				},
@@ -85,33 +98,3 @@ func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
 	}
 }
 
-// newbusyBoxPod demonstrates how to create a busybox pod
-func newbusyBoxPod(cr *v1alpha1.Integration) *v1.Pod {
-	return &v1.Pod{
-		TypeMeta: metav1.TypeMeta{
-			Kind:       "Pod",
-			APIVersion: "v1",
-		},
-		ObjectMeta: metav1.ObjectMeta{
-			Name:      cr.Name,
-			Namespace: cr.Namespace,
-			OwnerReferences: []metav1.OwnerReference{
-				*metav1.NewControllerRef(cr, schema.GroupVersionKind{
-					Group:   v1alpha1.SchemeGroupVersion.Group,
-					Version: v1alpha1.SchemeGroupVersion.Version,
-					Kind:    "Integration",
-				}),
-			},
-			Labels: cr.Labels,
-		},
-		Spec: v1.PodSpec{
-			Containers: []v1.Container{
-				{
-					Name:    cr.Name,
-					Image:   "busybox",
-					Command: []string{"sleep", "3600"},
-				},
-			},
-		},
-	}
-}

@@ -23,7 +23,14 @@ type Integration struct {
 
 type IntegrationSpec struct {
 	Replicas          *int32 `json:"replicas"`
+	Routes			  []RouteSpec `json:"routes"`
 }
+
+type RouteSpec struct {
+	Id				string `json:"id"`
+	Route			[]string `json:"route"`
+}
+
 type IntegrationStatus struct {
 	// Fill me
 }
