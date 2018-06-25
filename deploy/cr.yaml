@@ -2,7 +2,6 @@ apiVersion: "camel.apache.org/v1alpha1"
 kind: "Integration"
 metadata:
   name: "example"
-  namespace: "myproject"
 spec:
   replicas: 1
   routes:
