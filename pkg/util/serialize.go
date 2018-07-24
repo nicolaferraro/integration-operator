@@ -5,15 +5,8 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-type serializationContainer struct {
-	Routes *[]v1alpha1.RouteSpec `json:"routes"`
-}
-
-func Serialize(routes []v1alpha1.RouteSpec) (string, error) {
-
-	container := serializationContainer{&routes}
-
-	bin,err := yaml.Marshal(container)
+func Serialize(integration v1alpha1.IntegrationSpec) (string, error) {
+	bin,err := yaml.Marshal(integration)
 	if err != nil {
 		return "", err
 	}

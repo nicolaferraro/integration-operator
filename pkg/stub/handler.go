@@ -43,7 +43,7 @@ func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 
 func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
 
-	routes, err := util.Serialize(cr.Spec.Routes)
+	integration, err := util.Serialize(cr.Spec)
 	if err != nil {
 		logrus.Error("Error while extracting routes", err)
 	}
@@ -82,12 +82,12 @@ func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
 					Containers: []v1.Container{
 						{
 							Name:    cr.Name,
-							Image:   "nferraro/yaml2camel:latest",
+							Image:   "nferraro/camel-classic-runtime-spring-boot:latest",
 							ImagePullPolicy: v1.PullIfNotPresent,
 							Env:	 []v1.EnvVar{
 								{
-									Name: "CAMEL_ROUTES",
-									Value: routes,
+									Name: "CAMEL_INTEGRATION",
+									Value: integration,
 								},
 							},
 						},

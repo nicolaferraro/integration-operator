@@ -45,11 +45,14 @@ metadata:
   name: "example"
 spec:
   replicas: 1
-  routes:
+  flows:
    - id: timer
-     route:
-      - timer:tick
-      - log:info
+     name: "The Timer"
+     steps:
+      - type: endpoint
+        uri: timer:tick
+      - type: endpoint
+        uri: log:info
 ```
 
 You can save it into a file, e.g. `example.yaml`, then execute the following command:

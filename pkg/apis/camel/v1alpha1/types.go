@@ -22,13 +22,19 @@ type Integration struct {
 }
 
 type IntegrationSpec struct {
-	Replicas          *int32 `json:"replicas"`
-	Routes			  []RouteSpec `json:"routes"`
+	Replicas          *int32 `json:"replicas,omitempty"`
+	Flows			  []FlowSpec `json:"flows,omitempty"`
 }
 
-type RouteSpec struct {
-	Id				string `json:"id"`
-	Route			[]string `json:"route"`
+type FlowSpec struct {
+	Id				string `json:"id,omitempty"`
+	Name			string `json:"name,omitempty"`
+	Steps			[]StepSpec `json:"steps,omitempty"`
+}
+
+type StepSpec struct {
+	Type			string  `json:"type,omitempty"`
+	Uri				string	`json:"uri,omitempty"`
 }
 
 type IntegrationStatus struct {

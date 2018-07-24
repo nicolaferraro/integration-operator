@@ -7,19 +7,13 @@ import (
 )
 
 func TestSerialize(t *testing.T) {
-
-	routes := []v1alpha1.RouteSpec{
-		{
-			Route: []string{
-				"timer:tick",
-				"log:info",
-			},
-		},
+	replicas := int32(1)
+	integration := v1alpha1.IntegrationSpec{
+		Replicas: &replicas,
 	}
 
-	serialized, err := Serialize(routes)
+	serialized, err := Serialize(integration)
 	assert.Nil(t, err)
-	assert.Contains(t, serialized, "routes")
-	assert.Contains(t, serialized, "timer:tick")
-	assert.Contains(t, serialized, "log:info")
+	assert.Contains(t, serialized, "replicas")
+	assert.Contains(t, serialized, "1")
 }
