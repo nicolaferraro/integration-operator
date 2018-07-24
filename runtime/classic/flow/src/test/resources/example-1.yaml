@@ -1,0 +1,8 @@
+flows:
+ - id: flow1
+   name: My flow
+   steps:
+   - type: endpoint
+     uri: timer:tick?period=5&repeatCount=5
+   - type: endpoint
+     uri: mock:ciao
