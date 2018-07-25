@@ -26,8 +26,21 @@ type Handler struct {
 func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 	switch o := event.Object.(type) {
 	case *v1alpha1.Integration:
+		cm := newConfigMap(o)
 		deployment := newDeployment(o)
-		err := sdk.Create(deployment)
+
+		err := sdk.Create(cm)
+		if err != nil && !errors.IsAlreadyExists(err) {
+			logrus.Errorf("Failed to create config map : %v", err)
+			return err
+		} else if err != nil {
+			err := sdk.Update(cm)
+			if err != nil {
+				logrus.Errorf("Failed to update config map : %v", err)
+			}
+		}
+
+		err = sdk.Create(deployment)
 		if err != nil && !errors.IsAlreadyExists(err) {
 			logrus.Errorf("Failed to create integration deployment : %v", err)
 			return err
@@ -41,12 +54,36 @@ func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 	return nil
 }
 
-func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
-
+func newConfigMap(cr *v1alpha1.Integration) *v1.ConfigMap {
 	integration, err := util.Serialize(cr.Spec)
 	if err != nil {
-		logrus.Error("Error while extracting routes", err)
+		logrus.Error("Error while extracting integration", err)
 	}
+
+	return &v1.ConfigMap{
+		TypeMeta: metav1.TypeMeta{
+			Kind: "ConfigMap",
+			APIVersion: "v1",
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			Name: cr.Name,
+			Namespace: cr.Namespace,
+			OwnerReferences: []metav1.OwnerReference{
+				*metav1.NewControllerRef(cr, schema.GroupVersionKind{
+					Group:   v1alpha1.SchemeGroupVersion.Group,
+					Version: v1alpha1.SchemeGroupVersion.Version,
+					Kind:    "Integration",
+				}),
+			},
+			Labels: cr.Labels,
+		},
+		Data: map[string]string{
+			"integration": integration,
+		},
+	}
+}
+
+func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
 
 	return &appsv1.Deployment{
 		TypeMeta: metav1.TypeMeta{
@@ -84,10 +121,22 @@ func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
 							Name:    cr.Name,
 							Image:   "nferraro/camel-classic-runtime-spring-boot:latest",
 							ImagePullPolicy: v1.PullIfNotPresent,
-							Env:	 []v1.EnvVar{
+							VolumeMounts: []v1.VolumeMount {
 								{
-									Name: "CAMEL_INTEGRATION",
-									Value: integration,
+									Name: "integration",
+									MountPath: "/etc/camel",
+								},
+							},
+						},
+					},
+					Volumes: []v1.Volume {
+						{
+							Name: "integration",
+							VolumeSource: v1.VolumeSource{
+								ConfigMap: &v1.ConfigMapVolumeSource{
+									LocalObjectReference: v1.LocalObjectReference{
+										Name: cr.Name,
+									},
 								},
 							},
 						},
