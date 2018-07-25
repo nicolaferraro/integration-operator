@@ -13,6 +13,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	appsv1 "k8s.io/api/apps/v1"
 	"github.com/nicolaferraro/integration-operator/pkg/util"
+	"github.com/nicolaferraro/integration-operator/pkg/runtime/api"
+	"github.com/nicolaferraro/integration-operator/pkg/runtime"
 )
 
 func NewHandler() sdk.Handler {
@@ -20,14 +22,15 @@ func NewHandler() sdk.Handler {
 }
 
 type Handler struct {
-	// Fill me
 }
 
 func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 	switch o := event.Object.(type) {
 	case *v1alpha1.Integration:
+
+		r := runtime.GetIntegrationRuntimeFor(&o.Spec)
 		cm := newConfigMap(o)
-		deployment := newDeployment(o)
+		deployment := newDeployment(o, r)
 
 		err := sdk.Create(cm)
 		if err != nil && !errors.IsAlreadyExists(err) {
@@ -83,7 +86,7 @@ func newConfigMap(cr *v1alpha1.Integration) *v1.ConfigMap {
 	}
 }
 
-func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
+func newDeployment(cr *v1alpha1.Integration, r api.IntegrationRuntime) *appsv1.Deployment {
 
 	return &appsv1.Deployment{
 		TypeMeta: metav1.TypeMeta{
@@ -119,7 +122,7 @@ func newDeployment(cr *v1alpha1.Integration) *appsv1.Deployment {
 					Containers: []v1.Container{
 						{
 							Name:    cr.Name,
-							Image:   "nferraro/camel-classic-runtime-spring-boot:latest",
+							Image:   r.Image(),
 							ImagePullPolicy: v1.PullIfNotPresent,
 							VolumeMounts: []v1.VolumeMount {
 								{

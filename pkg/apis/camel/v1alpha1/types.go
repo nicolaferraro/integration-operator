@@ -38,5 +38,22 @@ type StepSpec struct {
 }
 
 type IntegrationStatus struct {
-	// Fill me
+	Phase	IntegrationPhase `json:"phase,omitempty"`
 }
+
+type IntegrationPhase string
+
+const (
+	IntegrationPhaseMissing	IntegrationPhase = ""
+	IntegrationPhaseRunning	IntegrationPhase = "Running"
+)
+
+type StrategySpec struct {
+	IntegrationRuntimeName `json:"runtime,omitempty"`
+}
+
+type IntegrationRuntimeName string
+
+const (
+	IntegrationRuntimeClassic IntegrationRuntimeName = "Classic"
+)
