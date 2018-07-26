@@ -8,6 +8,7 @@ import (
 var (
 	// All integration runtimes in strict priority order
 	runtimes = []api.IntegrationRuntime {
+		&goIntegrationRuntime{},
 		&classicIntegrationRuntime{},
 	}
 )

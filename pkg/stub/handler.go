@@ -28,7 +28,13 @@ func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 	switch o := event.Object.(type) {
 	case *v1alpha1.Integration:
 
-		r := runtime.GetIntegrationRuntimeFor(&o.Spec)
+		var r api.IntegrationRuntime
+		if o.Spec.Strategy.IntegrationRuntimeName != "" {
+			r = runtime.GetIntegrationRuntime(o.Spec.Strategy.IntegrationRuntimeName)
+		} else {
+			r = runtime.GetIntegrationRuntimeFor(&o.Spec)
+		}
+
 		cm := newConfigMap(o)
 		deployment := newDeployment(o, r)
 
@@ -53,12 +59,16 @@ func (h *Handler) Handle(ctx context.Context, event sdk.Event) error {
 				logrus.Errorf("Failed to update integration deployment : %v", err)
 			}
 		}
+
+		o.Status.Phase = v1alpha1.IntegrationPhaseRunning
+		o.Status.Strategy.IntegrationRuntimeName = r.Name()
+		return sdk.Update(o)
 	}
 	return nil
 }
 
 func newConfigMap(cr *v1alpha1.Integration) *v1.ConfigMap {
-	integration, err := util.Serialize(cr.Spec)
+	integration, err := util.Serialize(cr)
 	if err != nil {
 		logrus.Error("Error while extracting integration", err)
 	}

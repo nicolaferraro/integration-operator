@@ -1,5 +1,8 @@
 package me.nicolaferraro.kamel.flow.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StepSpec {
 
     private String type;

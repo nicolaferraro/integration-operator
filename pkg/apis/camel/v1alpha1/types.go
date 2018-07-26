@@ -22,30 +22,31 @@ type Integration struct {
 }
 
 type IntegrationSpec struct {
-	Replicas          *int32 `json:"replicas,omitempty"`
-	Flows			  []FlowSpec `json:"flows,omitempty"`
+	Replicas   *int32 `json:"replicas,omitempty"`
+	Strategy   StrategySpec `json:"strategy,omitempty"`
+	Flows      []FlowSpec `json:"flows,omitempty"`
 }
 
 type FlowSpec struct {
-	Id				string `json:"id,omitempty"`
-	Name			string `json:"name,omitempty"`
-	Steps			[]StepSpec `json:"steps,omitempty"`
+	Id       string `json:"id,omitempty"`
+	Name     string `json:"name,omitempty"`
+	Steps    []StepSpec `json:"steps,omitempty"`
 }
 
 type StepSpec struct {
-	Type			string  `json:"type,omitempty"`
-	Uri				string	`json:"uri,omitempty"`
+	Type     string `json:"type,omitempty"`
+	Uri      string `json:"uri,omitempty"`
 }
 
 type IntegrationStatus struct {
-	Phase	IntegrationPhase `json:"phase,omitempty"`
+	Phase      IntegrationPhase `json:"phase,omitempty"`
+	Strategy   StrategySpec `json:"strategy,omitempty"`
 }
 
 type IntegrationPhase string
 
 const (
-	IntegrationPhaseMissing	IntegrationPhase = ""
-	IntegrationPhaseRunning	IntegrationPhase = "Running"
+	IntegrationPhaseRunning IntegrationPhase = "Running"
 )
 
 type StrategySpec struct {
@@ -55,5 +56,6 @@ type StrategySpec struct {
 type IntegrationRuntimeName string
 
 const (
-	IntegrationRuntimeClassic IntegrationRuntimeName = "Classic"
+	IntegrationRuntimeClassic   IntegrationRuntimeName = "Classic"
+	IntegrationRuntimeGo        IntegrationRuntimeName = "Go"
 )

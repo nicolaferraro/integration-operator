@@ -8,6 +8,6 @@ spec:
    - id: timer
      steps:
      - type: endpoint
-       uri: timer:tick
+       uri: timer:tick?period=1s
      - type: endpoint
        uri: log:info
