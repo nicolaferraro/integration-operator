@@ -3,9 +3,9 @@
 Kamel (a.k.a. Camel-K) is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes
 and is specifically designed for serverless and microservice architectures.
 
-With Kamel, users can design integrations declaratively and run them on Kubernetes, without caring about platforms or servers.
-Kamel creates everything needed to run the integrations and optimizes resource utilization with several techniques, including running integrations on
-a [new ligtweight runtime written in Go](https://github.com/lburgazzoli/camel-go) or activating/deactivating them on demand.
+With Kamel, users can write integrations and run them directly on any Kubernetes instance, without caring about the platform, the server or the docker image that will run them.
+Kamel creates everything needed to run a integration: it optimizes resource utilization with several techniques and
+also, depending on the kind of integration (push based vs. pull based), activates/deactivates it on demand.
 
 Integrations can be used for many tasks: from just connecting a function to a external service, to orchestrating multiple functions and microservices
 in arbitrarily complex workflows.
@@ -18,20 +18,16 @@ The project is currently in status: **alpha**.
 
 Towards "beta" release:
 
+- [x] Do POCs to experiment high level architecture and language bindings
 - [x] Define a roadmap to startup
-- [ ] Package integrations in a builder service that produces runnable artifacts, one for each runtime (this is needed e.g. to enable using the full set of Apache Camel components)
+- [ ] Package integrations in a builder service that produces runnable artifacts and exposes metadata
 - [ ] Publish and run artifacts produced by a builder service (no matter the runtime). It may be a docker image or a tar file to improve performance.
 - [ ] Create the "kamel" binary
 - [ ] Define a release strategy and setup a CI/CD pipeline
-- [ ] Support integrations written in XML
-- [ ] Allow to specify dependencies in a uniform manner (Go packages, Java libraries)
+- [ ] Support integrations written in Java and XML
+- [ ] Add a small set of polyglot runtimes (e.g. Groovy, Javascript)
+- [ ] Allow to specify dependencies in the Kubernetes resource and in other places (e.g. as annotations/comments in the scripts files)
 - [ ] Automatically discover Apache Camel dependencies needed by a integration using the catalog
-- [ ] Enhance the flow DSL
-  - [ ] REST
-  - [ ] setHeader, setBody
-  - [ ] Simple language
-  - [ ] Basic EIPs
-- [ ] Define and implement a data mapping strategy
 
 Towards first "stable" release:
 
@@ -42,8 +38,8 @@ Towards first "stable" release:
 - [ ] Add a "on-demand" execution model for:
   - [ ] Timer component
   - [ ] Http component
-- [ ] Optimize performance of the Java runtime (compilation, configuration)
-- [ ] Uniform Go and Java runtime for common components
+- [ ] Optimize performance of the runtime with GraalVM
+- [ ] Convert polyglot runtimes to use GraalVM
 
 Towards "future":
 - [ ] Extend "on-demand" execution model to other components (messaging)
@@ -51,7 +47,7 @@ Towards "future":
 - [ ] Add tracing capabilities
 - [ ] Evaluate integration with Istio
 - [ ] Evaluate integration with API management platform
-- [ ] Enable integration deployment "on top" of other Kubernetes-based serverless platforms (Knative, Openwhisk)
+- [ ] Enable integration deployment "on top" of other Kubernetes-based serverless platforms and building blocks (Knative, Openwhisk)
 
 
 ## Installing the Operator
